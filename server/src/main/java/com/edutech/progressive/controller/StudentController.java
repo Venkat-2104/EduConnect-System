@@ -1,6 +1,10 @@
 package com.edutech.progressive.controller;
 
 import com.edutech.progressive.entity.Student;
+import com.edutech.progressive.service.impl.StudentServiceImplArraylist;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/student")
 public class StudentController {
+
+    @Autowired
+    private StudentServiceImplArraylist studentServiceImplArraylist;
 
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudents() {
@@ -44,16 +51,16 @@ public class StudentController {
     
     @GetMapping("/fromArrayList")
     public ResponseEntity<List<Student>> getAllStudentFromArrayList() {
-        return null;
+        return new ResponseEntity<>(studentServiceImplArraylist.getAllStudents(),HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/toArrayList")
     public ResponseEntity<Integer> addStudentToArrayList(Student student) {
-        return null;
+        return new ResponseEntity<>(studentServiceImplArraylist.addStudent(student),HttpStatus.CREATED);
     }
 
     @GetMapping("/fromArrayList/sorted")
     public ResponseEntity<List<Student>> getAllStudentSortedByNameFromArrayList() {
-        return null;
+        return new ResponseEntity<>(studentServiceImplArraylist.getAllStudentSortedByName(),HttpStatus.OK);
     }
 }
