@@ -45,6 +45,7 @@
 /home/coder/app/server/src/main/java/com/edutech/progressive/controller/StudentController.java
 /home/coder/app/server/src/main/java/com/edutech/progressive/entity/Attendance.java
 /home/coder/app/server/src/main/java/com/edutech/progressive/service/impl/TeacherServiceImplJpa.java
+/home/coder/app/server/src/main/java/com/edutech/progressive/SpringBootApplicationpublic.java
 /home/coder/app/server/src/main/java/com/edutech/progressive/dto/TeacherDTO.java
 /home/coder/app/server/src/main/java/com/edutech/progressive/service/TeacherService.java
 /home/coder/app/server/src/main/java/com/edutech/progressive/EduConnectApplication.java
