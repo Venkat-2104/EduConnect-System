@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import com.edutech.progressive.entity.Course;
 import com.edutech.progressive.exception.CourseAlreadyExistsException;
 import com.edutech.progressive.exception.CourseNotFoundException;
-import com.edutech.progressive.repository.AttendanceRepository;
 import com.edutech.progressive.repository.CourseRepository;
-import com.edutech.progressive.repository.EnrollmentRepository;
 import com.edutech.progressive.service.CourseService;
 
 @Service
@@ -35,7 +33,7 @@ public class CourseServiceImplJpa implements CourseService {
 
     @Override
     public Integer addCourse(Course course) throws Exception {
-        Course existingCourse = courseRepository.findByCourseName(course.getCourseName());
+        Course existingCourse = courseRepository.findByCourseId(course.getCourseId());
         if (existingCourse != null) {
             throw new CourseAlreadyExistsException("Course with this name already exists, Course Name: " + course.getCourseName());
         }
@@ -44,8 +42,8 @@ public class CourseServiceImplJpa implements CourseService {
 
     @Override
     public void updateCourse(Course course) throws Exception {
-        Course existingCourse = courseRepository.findByCourseName(course.getCourseName());
-        if (existingCourse != null && existingCourse.getCourseId() != course.getCourseId()) {
+        Course existingCourse = courseRepository.findByCourseId(course.getCourseId());
+        if (existingCourse != null) {
             throw new CourseAlreadyExistsException("Course with this name already exists, Course Name: " + course.getCourseName());
         }
         courseRepository.save(course);

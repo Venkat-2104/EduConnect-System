@@ -9,6 +9,4 @@ import com.edutech.progressive.entity.Student;
 public interface StudentRepository extends JpaRepository<Student,Integer>{
 
     Student findByStudentId(int studentId);
-
-    Student findByEmail(String email);
 }

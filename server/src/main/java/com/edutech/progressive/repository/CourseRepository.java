@@ -14,9 +14,7 @@ import com.edutech.progressive.entity.Course;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer>{
 
-    Course findByCourseId(int clinicId);
-
-    Course findByCourseName(String courseName);
+    Course findByCourseId(int courseId);
 
     @Query("Select c FROM Course c WHERE c.teacher.teacherId = :teacherId")
     List<Course> findAllByTeacherId(int teacherId);

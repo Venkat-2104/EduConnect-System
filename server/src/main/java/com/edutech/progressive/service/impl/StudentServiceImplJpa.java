@@ -33,7 +33,7 @@ public class StudentServiceImplJpa implements StudentService {
 
     @Override
     public Integer addStudent(Student student) throws Exception {
-        Student existingStudent = studentRepository.findByEmail(student.getEmail());
+        Student existingStudent = studentRepository.findByStudentId(student.getStudentId());
         if (existingStudent != null) {
             throw new StudentAlreadyExistsException("Student with this email already exists, Email: " + student.getEmail());
         }
@@ -49,8 +49,8 @@ public class StudentServiceImplJpa implements StudentService {
 
     @Override
     public void updateStudent(Student student) throws Exception {
-        Student existingStudent = studentRepository.findByEmail(student.getEmail());
-        if (existingStudent != null && existingStudent.getStudentId() != student.getStudentId()) {
+        Student existingStudent = studentRepository.findByStudentId(student.getStudentId());
+        if (existingStudent != null) {
             throw new StudentAlreadyExistsException("Student with this email already exists, Email: " + student.getEmail());
         }
         studentRepository.save(student);

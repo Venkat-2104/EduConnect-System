@@ -4,16 +4,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.edutech.progressive.dto.TeacherDTO;
 import com.edutech.progressive.entity.Teacher;
 import com.edutech.progressive.exception.TeacherAlreadyExistsException;
-import com.edutech.progressive.repository.CourseRepository;
-import com.edutech.progressive.repository.EnrollmentRepository;
 import com.edutech.progressive.repository.TeacherRepository;
-import com.edutech.progressive.repository.UserRepository;
 import com.edutech.progressive.service.TeacherService;
 
 @Service
@@ -33,7 +29,7 @@ public class TeacherServiceImplJpa implements TeacherService {
 
     @Override
     public Integer addTeacher(Teacher teacher) throws Exception {
-        Teacher existingTeacher = teacherRepository.findByEmail(teacher.getEmail());
+        Teacher existingTeacher = teacherRepository.findByTeacherId(teacher.getTeacherId());
         if (existingTeacher != null) {
             throw new TeacherAlreadyExistsException("Teacher with this email already exists, Email: " + teacher.getEmail());
         }
@@ -49,7 +45,7 @@ public class TeacherServiceImplJpa implements TeacherService {
 
     @Override
     public void updateTeacher(Teacher teacher) throws Exception {
-        Teacher existingTeacher = teacherRepository.findByEmail(teacher.getEmail());
+        Teacher existingTeacher = teacherRepository.findByTeacherId(teacher.getTeacherId());
         if (existingTeacher != null) {
             throw new TeacherAlreadyExistsException("Teacher with this email already exists, Email: " + teacher.getEmail());
         }
