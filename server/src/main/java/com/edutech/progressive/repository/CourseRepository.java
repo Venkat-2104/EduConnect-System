@@ -14,15 +14,16 @@ import com.edutech.progressive.entity.Course;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer>{
 
-    @Query("SELECT c FROM Course c WHERE c.courseId = :courseId")
-    public Course findByCourseId(@Param("courseId") int courseId);
+    Course findByCourseId(int clinicId);
 
-    @Query("SELECT c FROM Course c WHERE c.teacher.teacherId = :teacherId")
-    public List<Course> findAllByTeacherId(@Param("teacherId") int teacherId);
+    Course findByCourseName(String courseName);
+
+    @Query("Select c FROM Course c WHERE c.teacher.teacherId = :teacherId")
+    List<Course> findAllByTeacherId(int teacherId);
 
     @Transactional
     @Modifying
     @Query("DELETE FROM Course c WHERE c.teacher.teacherId = :teacherId")
-    public void deleteByTeacherId(@Param("teacherId") int teacherId);
+    void deleteByTeacherId(int teacherId);
     
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/teacher")
@@ -38,6 +39,8 @@ public class TeacherController {
     public ResponseEntity<Teacher> getTeacherById(@PathVariable int teacherId) {
         try {
             return new ResponseEntity<>(teacherServiceImplJpa.getTeacherById(teacherId),HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -47,6 +50,8 @@ public class TeacherController {
     public ResponseEntity<Integer> addTeacher(@RequestBody Teacher teacher) {
         try {
             return new ResponseEntity<>(teacherServiceImplJpa.addTeacher(teacher),HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -57,6 +62,8 @@ public class TeacherController {
         try {
             teacherServiceImplJpa.updateTeacher(teacher);
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -67,6 +74,8 @@ public class TeacherController {
         try {
             teacherServiceImplJpa.deleteTeacher(teacherId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
